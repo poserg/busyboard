@@ -1,7 +1,7 @@
-#include <Arduino.h>
+#include "Led.h"
+#include "Button.h"
 
-// Задаём номера выводов:
-const int leftButtonPin = 39;
+#define LEFT_BUTTON_PIN 39
 const int rightButtonPin = 38;
 const int upButtonPin = 40;
 const int downButtonPin = 41;
@@ -16,6 +16,8 @@ const int greenLedPin =  32;
 const int blueLedPin =  31;
 const int redLedPin =  30;
 
+Button leftButton(LEFT_BUTTON_PIN);
+
 void setup() {
 	Serial.begin(115200);
 
@@ -29,7 +31,7 @@ void setup() {
   pinMode(blueButtonPin, INPUT_PULLUP);
   pinMode(redButtonPin, INPUT_PULLUP);
 
-  pinMode(leftButtonPin, INPUT_PULLUP);
+  pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP);
   pinMode(rightButtonPin, INPUT_PULLUP);
   pinMode(upButtonPin, INPUT_PULLUP);
   pinMode(downButtonPin, INPUT_PULLUP);
@@ -41,7 +43,7 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(leftButtonPin) == LOW or digitalRead(yellowButtonPin) == LOW) {
+  if (digitalRead(LEFT_BUTTON_PIN) == LOW or digitalRead(yellowButtonPin) == LOW) {
     digitalWrite(yellowLedPin, LOW);
   } else {
     digitalWrite(yellowLedPin, HIGH);
