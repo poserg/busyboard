@@ -17,3 +17,4 @@ class Button {
     byte getState();
     bool isPressed();
 };
+#endif
