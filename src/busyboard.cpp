@@ -2,69 +2,69 @@
 #include "Button.h"
 
 #define LEFT_BUTTON_PIN 39
-const int rightButtonPin = 38;
-const int upButtonPin = 40;
-const int downButtonPin = 41;
+#define RIGHT_BUTTON_PIN 38
+#define UP_BUTTON_PIN 40
+#define DOWN_BUTTON_PIN 41
 
-const int yellowButtonPin = 37;
-const int greenButtonPin = 35;
-const int blueButtonPin = 34;
-const int redButtonPin = 36;
+#define YELLOW_BUTTON_PIN 37
+#define GREEN_BUTTON_PIN 35
+#define BLUE_BUTTON_PIN 34
+#define RED_BUTTON_PIN 36
 
-const int yellowLedPin =  33;
-const int greenLedPin =  32;
-const int blueLedPin =  31;
-const int redLedPin =  30;
+#define YELLOW_LED_PIN 33
+#define GREEN_LED_PIN 32
+#define BLUE_LED_PIN 31
+#define RED_LED_PIN 30
 
 Button leftButton(LEFT_BUTTON_PIN);
 
 void setup() {
 	Serial.begin(115200);
 
-  pinMode(yellowLedPin, OUTPUT);
-  pinMode(greenLedPin, OUTPUT);
-  pinMode(blueLedPin, OUTPUT);
-  pinMode(redLedPin, OUTPUT);
+	pinMode(YELLOW_LED_PIN, OUTPUT);
+	pinMode(GREEN_LED_PIN, OUTPUT);
+	pinMode(BLUE_LED_PIN, OUTPUT);
+	pinMode(RED_LED_PIN, OUTPUT);
 
-  pinMode(yellowButtonPin, INPUT_PULLUP);
-  pinMode(greenButtonPin, INPUT_PULLUP);
-  pinMode(blueButtonPin, INPUT_PULLUP);
-  pinMode(redButtonPin, INPUT_PULLUP);
+	pinMode(YELLOW_BUTTON_PIN, INPUT_PULLUP);
+	pinMode(GREEN_BUTTON_PIN, INPUT_PULLUP);
+	pinMode(BLUE_BUTTON_PIN, INPUT_PULLUP);
+	pinMode(RED_BUTTON_PIN, INPUT_PULLUP);
 
-  pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP);
-  pinMode(rightButtonPin, INPUT_PULLUP);
-  pinMode(upButtonPin, INPUT_PULLUP);
-  pinMode(downButtonPin, INPUT_PULLUP);
+	pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP);
+	pinMode(RIGHT_BUTTON_PIN, INPUT_PULLUP);
+	pinMode(UP_BUTTON_PIN, INPUT_PULLUP);
+	pinMode(DOWN_BUTTON_PIN, INPUT_PULLUP);
 
-  digitalWrite(yellowLedPin, LOW);
-  digitalWrite(redLedPin, LOW);
-  digitalWrite(greenLedPin, LOW);
-  digitalWrite(blueLedPin, LOW);
+	digitalWrite(YELLOW_LED_PIN, LOW);
+	digitalWrite(RED_LED_PIN, LOW);
+	digitalWrite(GREEN_LED_PIN, LOW);
+	digitalWrite(BLUE_LED_PIN, LOW);
 }
 
 void loop() {
-  if (digitalRead(LEFT_BUTTON_PIN) == LOW or digitalRead(yellowButtonPin) == LOW) {
-    digitalWrite(yellowLedPin, LOW);
-  } else {
-    digitalWrite(yellowLedPin, HIGH);
-  }
-  if (digitalRead(rightButtonPin) == LOW || digitalRead(redButtonPin) == LOW) {
-    digitalWrite(redLedPin, LOW);
-  } else {
-    digitalWrite(redLedPin, HIGH);
-  }
-  if (digitalRead(upButtonPin) == LOW || digitalRead(greenButtonPin) == LOW) {
-	  if (digitalRead(upButtonPin) == LOW)
-		  Serial.println("upButton is HIG");
-	  if (digitalRead(greenButtonPin) == LOW)
-		  Serial.println("greenButton is HIG");
-    digitalWrite(greenLedPin, LOW);
-  } else {
-    digitalWrite(greenLedPin, HIGH);
-  }
-  if (digitalRead(downButtonPin) == LOW || digitalRead(blueButtonPin) == LOW) {
-    digitalWrite(blueLedPin, LOW);
-  } else {
-    digitalWrite(blueLedPin, HIGH);
-  }
+	if (digitalRead(LEFT_BUTTON_PIN) == LOW or digitalRead(YELLOW_BUTTON_PIN) == LOW) {
+	  digitalWrite(YELLOW_LED_PIN, LOW);
+	} else {
+	  digitalWrite(YELLOW_LED_PIN, HIGH);
+	}
+	if (digitalRead(RIGHT_BUTTON_PIN) == LOW || digitalRead(RED_BUTTON_PIN) == LOW) {
+	  digitalWrite(RED_LED_PIN, LOW);
+	} else {
+	  digitalWrite(RED_LED_PIN, HIGH);
+	}
+	if (digitalRead(UP_BUTTON_PIN) == LOW || digitalRead(GREEN_BUTTON_PIN) == LOW) {
+		  if (digitalRead(UP_BUTTON_PIN) == LOW)
+			  Serial.println("UP_BUTTON is HIG");
+		  if (digitalRead(GREEN_BUTTON_PIN) == LOW)
+			  Serial.println("GREEN_BUTTON is HIG");
+	  digitalWrite(GREEN_LED_PIN, LOW);
+	} else {
+	  digitalWrite(GREEN_LED_PIN, HIGH);
+	}
+	if (digitalRead(DOWN_BUTTON_PIN) == LOW || digitalRead(BLUE_BUTTON_PIN) == LOW) {
+	  digitalWrite(BLUE_LED_PIN, LOW);
+	} else {
+	  digitalWrite(BLUE_LED_PIN, HIGH);
+	}
 }
