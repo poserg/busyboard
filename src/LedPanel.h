@@ -1,12 +1,13 @@
 #ifndef SRC__LEDS_LEDPANEL_H_
 #define SRC__LEDS_LEDPANEL_H_
-#include "LedSwitchingStrategy.h"
+#include "AllSwitchOnStrategy.h"
+#include "SimpleStrategy.h"
 
 class LedPanel {
 private:
 	int strategiesSize;
 	int currentStrategyIndex = 0;
-	LedSwitchingStrategy* strategies;
+	LedSwitchingStrategy** strategies;
 public:
 	LedPanel(Led* leds, int ledsSize);
 	void processNextIteration();

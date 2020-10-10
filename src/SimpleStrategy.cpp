@@ -12,12 +12,12 @@ bool SimpleStrategy::processNextIteration() {
 		leds[currentLed - 1].off();
 	}
 	leds[currentLed].on();
-	currentLed++;
 
 	if (currentLed >= ledsSize) {
 		currentLed = 0;
 		return true;
 	} else {
+		currentLed++;
 		return false;
 	}
 }
