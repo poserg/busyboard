@@ -8,7 +8,7 @@ private:
 	int currentStrategyIndex = 0;
 	LedSwitchingStrategy* strategies;
 public:
-	LedPanel(LedSwitchingStrategy* strategies, int strategiesSize);
+	LedPanel(Led* leds, int ledsSize);
 	void processNextIteration();
 };
 

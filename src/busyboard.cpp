@@ -1,7 +1,6 @@
 #include "Led.h"
 #include "Button.h"
 #include "LedPanel.h"
-#include "SimpleStrategy.h"
 
 #define LEFT_BUTTON_PIN 39
 #define RIGHT_BUTTON_PIN 38
@@ -18,13 +17,16 @@
 #define BLUE_LED_PIN 31
 #define RED_LED_PIN 30
 
+#define BIG_GREEN_LED 44
+#define BIG_BLUE_LED 42
+
 const int tumblerLedCount = 4;
 Led tumblerLeds[tumblerLedCount] = { Led(YELLOW_LED_PIN), Led(GREEN_LED_PIN), Led(BLUE_LED_PIN), Led(RED_LED_PIN) };
+auto tumblerLedPanel = new LedPanel(tumblerLeds, tumblerLedCount);
 
-const int strategiesCount = 1;
-auto ss = new SimpleStrategy(tumblerLeds, tumblerLedCount);
-LedSwitchingStrategy** strategies[strategiesCount] = { &ss };
-auto tumblerLedPanel = new LedPanel(**strategies, 1);
+const int buttonLedCount = 2;
+Led buttonLeds[buttonLedCount] = { Led(BIG_GREEN_LED), Led(BIG_BLUE_LED) };
+auto buttonLedPanel = new LedPanel(buttonLeds, buttonLedCount);
 
 void setup() {
 	// Serial.begin(115200);
@@ -44,12 +46,16 @@ void setup() {
 	pinMode(UP_BUTTON_PIN, INPUT_PULLUP);
 	pinMode(DOWN_BUTTON_PIN, INPUT_PULLUP);
 
-	for (int i = 0; i< tumblerLedCount; i++) {
+	for (int i = 0; i < tumblerLedCount; i++) {
 		tumblerLeds[i].off();
+	}
+	for (int i = 0; i < buttonLedCount; i++) {
+		buttonLeds[i].off();
 	}
 }
 
 void loop() {
 	tumblerLedPanel->processNextIteration();
+	buttonLedPanel->processNextIteration();
 	delay(400);
 }

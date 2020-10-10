@@ -1,9 +1,11 @@
 #include "LedPanel.h"
+#include "SimpleStrategy.h"
 #include <Arduino.h>
 
-LedPanel::LedPanel(LedSwitchingStrategy* strategies, int strategiesSize) {
-	this->strategies = strategies;
-	this->strategiesSize = strategiesSize;
+LedPanel::LedPanel(Led* leds, int ledsSize) {
+	this->strategiesSize = 1;
+	LedSwitchingStrategy* strategies[this->strategiesSize] = { new SimpleStrategy(leds, ledsSize) };
+	this->strategies = *strategies;
 }
 
 void LedPanel::processNextIteration() {
