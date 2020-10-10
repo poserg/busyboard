@@ -1,5 +1,7 @@
 #include "Led.h"
 #include "Button.h"
+#include "LedPanel.h"
+#include "SimpleStrategy.h"
 
 #define LEFT_BUTTON_PIN 39
 #define RIGHT_BUTTON_PIN 38
@@ -16,10 +18,16 @@
 #define BLUE_LED_PIN 31
 #define RED_LED_PIN 30
 
-Button leftButton(LEFT_BUTTON_PIN);
+const int tumblerLedCount = 4;
+Led tumblerLeds[tumblerLedCount] = { Led(YELLOW_LED_PIN), Led(GREEN_LED_PIN), Led(BLUE_LED_PIN), Led(RED_LED_PIN) };
+
+const int strategiesCount = 1;
+auto ss = new SimpleStrategy(tumblerLeds, tumblerLedCount);
+LedSwitchingStrategy** strategies[strategiesCount] = { &ss };
+auto tumblerLedPanel = new LedPanel(**strategies, 1);
 
 void setup() {
-	Serial.begin(115200);
+	// Serial.begin(115200);
 
 	pinMode(YELLOW_LED_PIN, OUTPUT);
 	pinMode(GREEN_LED_PIN, OUTPUT);
@@ -36,35 +44,12 @@ void setup() {
 	pinMode(UP_BUTTON_PIN, INPUT_PULLUP);
 	pinMode(DOWN_BUTTON_PIN, INPUT_PULLUP);
 
-	digitalWrite(YELLOW_LED_PIN, LOW);
-	digitalWrite(RED_LED_PIN, LOW);
-	digitalWrite(GREEN_LED_PIN, LOW);
-	digitalWrite(BLUE_LED_PIN, LOW);
+	for (int i = 0; i< tumblerLedCount; i++) {
+		tumblerLeds[i].off();
+	}
 }
 
 void loop() {
-	if (digitalRead(LEFT_BUTTON_PIN) == LOW or digitalRead(YELLOW_BUTTON_PIN) == LOW) {
-	  digitalWrite(YELLOW_LED_PIN, LOW);
-	} else {
-	  digitalWrite(YELLOW_LED_PIN, HIGH);
-	}
-	if (digitalRead(RIGHT_BUTTON_PIN) == LOW || digitalRead(RED_BUTTON_PIN) == LOW) {
-	  digitalWrite(RED_LED_PIN, LOW);
-	} else {
-	  digitalWrite(RED_LED_PIN, HIGH);
-	}
-	if (digitalRead(UP_BUTTON_PIN) == LOW || digitalRead(GREEN_BUTTON_PIN) == LOW) {
-		  if (digitalRead(UP_BUTTON_PIN) == LOW)
-			  Serial.println("UP_BUTTON is HIG");
-		  if (digitalRead(GREEN_BUTTON_PIN) == LOW)
-			  Serial.println("GREEN_BUTTON is HIG");
-	  digitalWrite(GREEN_LED_PIN, LOW);
-	} else {
-	  digitalWrite(GREEN_LED_PIN, HIGH);
-	}
-	if (digitalRead(DOWN_BUTTON_PIN) == LOW || digitalRead(BLUE_BUTTON_PIN) == LOW) {
-	  digitalWrite(BLUE_LED_PIN, LOW);
-	} else {
-	  digitalWrite(BLUE_LED_PIN, HIGH);
-	}
+	tumblerLedPanel->processNextIteration();
+	delay(400);
 }
