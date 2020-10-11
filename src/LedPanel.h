@@ -2,6 +2,7 @@
 #define SRC__LEDS_LEDPANEL_H_
 #include "AllSwitchOnStrategy.h"
 #include "SimpleStrategy.h"
+#include "CarouselStrategy.h"
 
 class LedPanel {
 private:
