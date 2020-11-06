@@ -127,11 +127,11 @@ void loop() {
 	tumblerLedPanel->processNextIteration();
 	buttonLedPanel->processNextIteration();
 
-	matrix.drawRGBBitmap(0, 0, bitmap, matrix.width(), matrix.height());
-	matrix.swapBuffers(false);
-	delay(400);
-	matrix.drawRGBBitmap(0, 0, bitmap, matrix.width(), matrix.height());
-	matrix.drawRGBBitmap(33, 4, flasher_high, 6, 5);
-	matrix.swapBuffers(false);
-	delay(400);
+//	matrix.drawRGBBitmap(0, 0, bitmap, matrix.width(), matrix.height());
+//	matrix.swapBuffers(false);
+//	delay(400);
+//	matrix.drawRGBBitmap(0, 0, bitmap, matrix.width(), matrix.height());
+//	matrix.drawRGBBitmap(33, 4, flasher_high, 6, 5);
+//	matrix.swapBuffers(false);
+//	delay(400);
 }

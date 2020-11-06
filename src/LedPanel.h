@@ -8,6 +8,8 @@ class LedPanel {
 private:
 	int strategiesSize;
 	int currentStrategyIndex = 0;
+	long previousMillis = 0;
+	const long delay = 400;
 	LedSwitchingStrategy** strategies;
 public:
 	LedPanel(Led* leds, int ledsSize);

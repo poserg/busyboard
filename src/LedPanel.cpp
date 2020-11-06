@@ -12,6 +12,12 @@ LedPanel::LedPanel(Led* leds, int ledsSize) {
 }
 
 void LedPanel::processNextIteration() {
+	auto currentMillis = millis();
+	if (currentMillis - this->previousMillis < this->delay) {
+		return;
+	}
+
+	this->previousMillis = currentMillis;
 	bool isCompleted = strategies[currentStrategyIndex]->processNextIteration();
 	if (isCompleted) {
 		currentStrategyIndex++;
