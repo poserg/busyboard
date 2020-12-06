@@ -1,4 +1,5 @@
 #include "Led.h"
+#include "TumblerLed.h"
 #include "Button.h"
 #include "LedPanel.h"
 
@@ -36,7 +37,10 @@ RGBmatrixPanel* matrix = new RGBmatrixPanel(A, B, C, D, CLK, LAT, OE, true, 64);
 #define BIG_BLUE_LED 42
 
 const int tumblerLedCount = 4;
-Led tumblerLeds[tumblerLedCount] = { Led(YELLOW_LED_PIN), Led(GREEN_LED_PIN), Led(BLUE_LED_PIN), Led(RED_LED_PIN) };
+Led tumblerLeds[tumblerLedCount] = { TumblerLed(YELLOW_LED_PIN, YELLOW_BUTTON_PIN),
+		TumblerLed(GREEN_LED_PIN, GREEN_BUTTON_PIN),
+		TumblerLed(BLUE_LED_PIN, BLUE_BUTTON_PIN),
+		TumblerLed(RED_LED_PIN, RED_BUTTON_PIN) };
 auto tumblerLedPanel = new LedPanel(tumblerLeds, tumblerLedCount);
 
 const int buttonLedCount = 2;
@@ -44,12 +48,13 @@ Led buttonLeds[buttonLedCount] = { Led(BIG_GREEN_LED), Led(BIG_BLUE_LED) };
 auto buttonLedPanel = new LedPanel(buttonLeds, buttonLedCount);
 
 auto car = new PoliceCar(matrix);
-Button upButton(UP_BUTTON_PIN);
+Button redButton(RED_BUTTON_PIN);
 
 void setup() {
 	matrix->begin();
 	// Serial.begin(115200);
 
+	// :TODO Удалить объявления. Уже происходит установка нужного мода в Led и Button
 	pinMode(YELLOW_LED_PIN, OUTPUT);
 	pinMode(GREEN_LED_PIN, OUTPUT);
 	pinMode(BLUE_LED_PIN, OUTPUT);
@@ -76,7 +81,7 @@ void setup() {
 }
 
 void loop() {
-	car->setIsFlasherOn(!upButton.isPressed());
+	car->setIsFlasherOn(!redButton.isPressed());
 	tumblerLedPanel->processNextIteration();
 	buttonLedPanel->processNextIteration();
 	car->processNextIteration();
