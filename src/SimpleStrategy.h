@@ -7,9 +7,9 @@ class SimpleStrategy: public LedSwitchingStrategy {
 private:
 	int ledsSize;
 	int currentLed = 0;
-	Led* leds;
+	Led** leds;
 public:
-	SimpleStrategy(Led* leds, int ledsSize);
+	SimpleStrategy(Led** leds, int ledsSize);
 	~SimpleStrategy() {};
 	bool processNextIteration();
 };

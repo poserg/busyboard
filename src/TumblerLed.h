@@ -8,8 +8,8 @@ class TumblerLed: public Led, public Button {
 private:
 	byte ledPin;
 public:
-	TumblerLed(byte ledPin, byte buttonPin) : Led(ledPin), Button(buttonPin), ledPin(ledPin) { };
-	void on() override;
+	TumblerLed(byte ledPin, byte buttonPin) : Led(ledPin), Button(buttonPin), ledPin(ledPin) { }
+	virtual void on();
 };
 
 #endif /* SRC_TUMBLERLED_H_ */

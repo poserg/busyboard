@@ -9,13 +9,13 @@ private:
 	int currentCycleNumber;
 	int countOfCycle;
 	bool isTurnOff;
-	Led* leds;
+	Led** leds;
 	void reset() {
 		this->currentCycleNumber = 0;
 		this->isTurnOff = true;
 	}
 public:
-	AllSwtichOnStrategy(Led* leds, int ledsSize, int countOfCycle);
+	AllSwtichOnStrategy(Led** leds, int ledsSize, int countOfCycle);
 	~AllSwtichOnStrategy() {};
 	bool processNextIteration();
 };

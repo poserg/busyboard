@@ -1,6 +1,6 @@
 #include "CarouselStrategy.h"
 
-CarouselStrategy::CarouselStrategy(Led* leds, int ledsSize):LedSwitchingStrategy() {
+CarouselStrategy::CarouselStrategy(Led** leds, int ledsSize):LedSwitchingStrategy() {
 	this->leds = leds;
 	this->ledsSize = ledsSize;
 }
@@ -17,9 +17,9 @@ bool CarouselStrategy::processNextIteration() {
 		}
 	}
 	if (isSwitchOnCycle) {
-		leds[currentLed].on();
+		leds[currentLed]->on();
 	} else {
-		leds[currentLed].off();
+		leds[currentLed]->off();
 	}
 	currentLed++;
 	return false;

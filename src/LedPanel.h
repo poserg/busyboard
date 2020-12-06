@@ -12,7 +12,7 @@ private:
 	const long delay = 400;
 	LedSwitchingStrategy** strategies;
 public:
-	LedPanel(Led* leds, int ledsSize);
+	LedPanel(Led** leds, int ledsSize);
 	void processNextIteration();
 };
 

@@ -1,6 +1,6 @@
 #include "LedPanel.h"
 
-LedPanel::LedPanel(Led* leds, int ledsSize) {
+LedPanel::LedPanel(Led** leds, int ledsSize) {
 	this->strategiesSize = 3;
 	auto ss = new SimpleStrategy(leds, ledsSize);
 	auto asos = new AllSwtichOnStrategy(leds, ledsSize, 3);

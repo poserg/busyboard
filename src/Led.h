@@ -9,7 +9,8 @@ class Led {
   public:
     Led(byte pin);
     void init();
-    void on();
+    virtual void on();
     void off();
+    virtual ~Led() {};
 };
 #endif

@@ -1,4 +1,3 @@
-#include "Led.h"
 #include "TumblerLed.h"
 #include "Button.h"
 #include "LedPanel.h"
@@ -36,19 +35,20 @@ RGBmatrixPanel* matrix = new RGBmatrixPanel(A, B, C, D, CLK, LAT, OE, true, 64);
 #define BIG_GREEN_LED 44
 #define BIG_BLUE_LED 42
 
+auto yellowTumbler = new TumblerLed(YELLOW_LED_PIN, YELLOW_BUTTON_PIN);
+auto greenTumbler = new TumblerLed(GREEN_LED_PIN, GREEN_BUTTON_PIN);
+auto blueTumbler = new TumblerLed(BLUE_LED_PIN, BLUE_BUTTON_PIN);
+auto redTumbler = new TumblerLed(RED_LED_PIN, RED_BUTTON_PIN);
+
 const int tumblerLedCount = 4;
-Led tumblerLeds[tumblerLedCount] = { TumblerLed(YELLOW_LED_PIN, YELLOW_BUTTON_PIN),
-		TumblerLed(GREEN_LED_PIN, GREEN_BUTTON_PIN),
-		TumblerLed(BLUE_LED_PIN, BLUE_BUTTON_PIN),
-		TumblerLed(RED_LED_PIN, RED_BUTTON_PIN) };
+Led* tumblerLeds[tumblerLedCount] = { yellowTumbler, greenTumbler, blueTumbler, redTumbler };
 auto tumblerLedPanel = new LedPanel(tumblerLeds, tumblerLedCount);
 
 const int buttonLedCount = 2;
-Led buttonLeds[buttonLedCount] = { Led(BIG_GREEN_LED), Led(BIG_BLUE_LED) };
+Led* buttonLeds[buttonLedCount] = { new Led(BIG_GREEN_LED), new Led(BIG_BLUE_LED) };
 auto buttonLedPanel = new LedPanel(buttonLeds, buttonLedCount);
 
 auto car = new PoliceCar(matrix);
-Button redButton(RED_BUTTON_PIN);
 
 void setup() {
 	matrix->begin();
@@ -71,17 +71,17 @@ void setup() {
 	pinMode(DOWN_BUTTON_PIN, INPUT_PULLUP);
 
 	for (int i = 0; i < tumblerLedCount; i++) {
-		tumblerLeds[i].off();
+		tumblerLeds[i]->off();
 	}
 	for (int i = 0; i < buttonLedCount; i++) {
-		buttonLeds[i].off();
+		buttonLeds[i]->off();
 	}
 
 	car->draw();
 }
 
 void loop() {
-	car->setIsFlasherOn(!redButton.isPressed());
+	car->setIsFlasherOn(redTumbler->isPressed());
 	tumblerLedPanel->processNextIteration();
 	buttonLedPanel->processNextIteration();
 	car->processNextIteration();

@@ -1,17 +1,17 @@
 #include "SimpleStrategy.h"
 
-SimpleStrategy::SimpleStrategy(Led* leds, int ledsSize):LedSwitchingStrategy() {
+SimpleStrategy::SimpleStrategy(Led** leds, int ledsSize):LedSwitchingStrategy() {
 	this->leds = leds;
 	this->ledsSize = ledsSize;
 }
 
 bool SimpleStrategy::processNextIteration() {
 	if (currentLed == 0) {
-		leds[ledsSize - 1].off();
+		leds[ledsSize - 1]->off();
 	} else {
-		leds[currentLed - 1].off();
+		leds[currentLed - 1]->off();
 	}
-	leds[currentLed].on();
+	leds[currentLed]->on();
 	currentLed++;
 
 	if (currentLed >= ledsSize) {

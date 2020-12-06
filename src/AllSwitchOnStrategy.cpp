@@ -1,6 +1,6 @@
 #include "AllSwitchOnStrategy.h"
 
-AllSwtichOnStrategy::AllSwtichOnStrategy(Led* leds, int ledsSize, int countOfCycle):LedSwitchingStrategy() {
+AllSwtichOnStrategy::AllSwtichOnStrategy(Led** leds, int ledsSize, int countOfCycle):LedSwitchingStrategy() {
 	this->leds = leds;
 	this->ledsSize = ledsSize;
 	this->countOfCycle = countOfCycle;
@@ -10,12 +10,12 @@ AllSwtichOnStrategy::AllSwtichOnStrategy(Led* leds, int ledsSize, int countOfCyc
 bool AllSwtichOnStrategy::processNextIteration() {
 	if (this->isTurnOff) {
 		for (int i = 0; i < this->ledsSize; i++) {
-			this->leds[i].on();
+			this->leds[i]->on();
 		}
 		this->isTurnOff = false;
 	} else {
 		for (int i = 0; i < this->ledsSize; i++) {
-			this->leds[i].off();
+			this->leds[i]->off();
 		}
 		this->isTurnOff = true;
 		currentCycleNumber++;

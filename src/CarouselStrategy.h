@@ -6,10 +6,10 @@
 class CarouselStrategy: public LedSwitchingStrategy {
 	int ledsSize;
 	int currentLed = 0;
-	Led* leds;
+	Led** leds;
 	bool isSwitchOnCycle = true;
 public:
-	CarouselStrategy(Led* leds, int ledsSize);
+	CarouselStrategy(Led** leds, int ledsSize);
 	~CarouselStrategy() {};
 	bool processNextIteration();
 };

@@ -7,6 +7,5 @@ void TumblerLed::on() {
 	if (this->isPressed()) {
 		return;
 	}
-	// Led::on();
-	// digitalWrite(this->ledPin, HIGH);
+	Led::on();
 }
