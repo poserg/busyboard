@@ -50,6 +50,8 @@ auto buttonLedPanel = new LedPanel(buttonLeds, buttonLedCount);
 
 auto car = new PoliceCar(matrix);
 
+auto upButton = new Button(UP_BUTTON_PIN);
+
 void setup() {
 	matrix->begin();
 	// Serial.begin(115200);
@@ -81,7 +83,7 @@ void setup() {
 }
 
 void loop() {
-	car->setIsFlasherOn(redTumbler->isPressed());
+	car->setIsFlasherOn(redTumbler->isPressed() || upButton->isPressed());
 	tumblerLedPanel->processNextIteration();
 	buttonLedPanel->processNextIteration();
 	car->processNextIteration();

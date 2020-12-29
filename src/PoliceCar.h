@@ -52,8 +52,9 @@ class PoliceCar {
 private:
 	RGBmatrixPanel* matrix;
 	long previousMillis = 0;
-	const long delay = 1000;
+	const long delay = 300;
 	bool isFlasherOn = false;
+	bool isFlasherTurnedOn = false;
 public:
 	PoliceCar(RGBmatrixPanel* matrix);
 	~PoliceCar() {};

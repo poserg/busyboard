@@ -10,15 +10,23 @@ void PoliceCar::draw() {
 }
 
 void PoliceCar::processNextIteration() {
-//	auto currentMillis = millis();
-//	if (currentMillis - previousMillis < delay) {
-//		return;
-//	}
-	if (isFlasherOn) {
+	if (!isFlasherOn) {
+		isFlasherTurnedOn = false;
+		draw();
+		return;
+	}
+	auto currentMillis = millis();
+	if (currentMillis - previousMillis < delay) {
+		return;
+	}
+	previousMillis = currentMillis;
+	if (!isFlasherTurnedOn) {
+		isFlasherTurnedOn = true;
 		matrix->drawRGBBitmap(0, 0, bitmap, matrix->width(), matrix->height());
 		matrix->drawRGBBitmap(33, 4, flasher_high, 6, 5);
 		this->matrix->swapBuffers(false);
 	} else {
+		isFlasherTurnedOn = false;
 		draw();
 	}
 }
