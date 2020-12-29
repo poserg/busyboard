@@ -56,22 +56,6 @@ void setup() {
 	matrix->begin();
 	// Serial.begin(115200);
 
-	// :TODO Удалить объявления. Уже происходит установка нужного мода в Led и Button
-	pinMode(YELLOW_LED_PIN, OUTPUT);
-	pinMode(GREEN_LED_PIN, OUTPUT);
-	pinMode(BLUE_LED_PIN, OUTPUT);
-	pinMode(RED_LED_PIN, OUTPUT);
-
-	pinMode(YELLOW_BUTTON_PIN, INPUT_PULLUP);
-	pinMode(GREEN_BUTTON_PIN, INPUT_PULLUP);
-	pinMode(BLUE_BUTTON_PIN, INPUT_PULLUP);
-	pinMode(RED_BUTTON_PIN, INPUT_PULLUP);
-
-	pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP);
-	pinMode(RIGHT_BUTTON_PIN, INPUT_PULLUP);
-	pinMode(UP_BUTTON_PIN, INPUT_PULLUP);
-	pinMode(DOWN_BUTTON_PIN, INPUT_PULLUP);
-
 	for (int i = 0; i < tumblerLedCount; i++) {
 		tumblerLeds[i]->off();
 	}
