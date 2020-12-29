@@ -3,6 +3,7 @@
 #include "LedPanel.h"
 
 #include "PoliceCar.h"
+#include "PoliceCar2.h"
 
 // управляющие пины матрицы
 #define CLK   11
@@ -48,7 +49,7 @@ const int buttonLedCount = 2;
 Led* buttonLeds[buttonLedCount] = { new Led(BIG_GREEN_LED), new Led(BIG_BLUE_LED) };
 auto buttonLedPanel = new LedPanel(buttonLeds, buttonLedCount);
 
-auto car = new PoliceCar(matrix);
+Car* car = new PoliceCar(matrix);
 
 auto upButton = new Button(UP_BUTTON_PIN);
 
@@ -62,8 +63,6 @@ void setup() {
 	for (int i = 0; i < buttonLedCount; i++) {
 		buttonLeds[i]->off();
 	}
-
-	car->draw();
 }
 
 void loop() {
