@@ -4,6 +4,7 @@
 
 #include "PoliceCar.h"
 #include "PoliceCar2.h"
+#include "EmergencyTruck.h"
 
 // управляющие пины матрицы
 #define CLK   11
@@ -49,9 +50,13 @@ const int buttonLedCount = 2;
 Led* buttonLeds[buttonLedCount] = { new Led(BIG_GREEN_LED), new Led(BIG_BLUE_LED) };
 auto buttonLedPanel = new LedPanel(buttonLeds, buttonLedCount);
 
-Car* car = new PoliceCar(matrix);
+const int carsCount = 3;
+int currentCarIndex = 0;
+Car* cars[carsCount] = { new PoliceCar(matrix), new PoliceCar2(matrix), new EmergencyTruck(matrix) };
 
 auto upButton = new Button(UP_BUTTON_PIN);
+auto leftButton = new Button(LEFT_BUTTON_PIN);
+auto rightButton = new Button(RIGHT_BUTTON_PIN);
 
 void setup() {
 	matrix->begin();
@@ -65,9 +70,29 @@ void setup() {
 	}
 }
 
+void showNextCar() {
+	currentCarIndex++;
+	if (currentCarIndex >= carsCount) {
+		currentCarIndex = 0;
+	}
+}
+
+void showPreviousCar() {
+	currentCarIndex--;
+	if (currentCarIndex <= 0) {
+		currentCarIndex = carsCount - 1;
+	}
+}
+
 void loop() {
-	car->setIsFlasherOn(redTumbler->isPressed() || upButton->isPressed());
+	cars[currentCarIndex]->setIsFlasherOn(redTumbler->isPressed() || upButton->isPressed());
 	tumblerLedPanel->processNextIteration();
 	buttonLedPanel->processNextIteration();
-	car->processNextIteration();
+	cars[currentCarIndex]->processNextIteration();
+	if (leftButton->isPressed()) {
+		showPreviousCar();
+	}
+	if (rightButton->isPressed()) {
+		showNextCar();
+	}
 }
